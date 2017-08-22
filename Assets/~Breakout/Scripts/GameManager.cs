@@ -19,6 +19,7 @@ namespace Breakout
         void Start()
         {
             GenerateBlocks();
+            UpdateBlocks();
         }
 
 
