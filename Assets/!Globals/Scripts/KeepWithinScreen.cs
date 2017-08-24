@@ -28,6 +28,7 @@ public class KeepWithinScreen : MonoBehaviour
         camBounds = new Bounds(cam.transform.position, new Vector3(camWidth, camHeight));
     }
 
+
     Vector3 CheckBounds()
     {
         Vector3 pos = transform.position;
