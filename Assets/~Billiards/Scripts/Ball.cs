@@ -2,38 +2,45 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Ball : MonoBehaviour
+namespace Billiards
 {
-    public float gravity = -9.81f;
-    private Rigidbody rigid;
-    // Use this for initialization
-    void Start()
+    public class Ball : MonoBehaviour
     {
-        rigid = GetComponent<Rigidbody>();
-    }
+        public float stopSpeed = 0.2f;
 
-    // Update is called once per frame
-    void FixedUpdate()
-    {
-        rigid.velocity = rigid.velocity.normalized + Vector3.back * gravity;
-    }
-
-    void OnCollisionEnter(Collision other)
-    {
-        Ball ball = other.collider.GetComponent<Ball>();
-        if (ball != null)
+        private Rigidbody rigid;
+        // Use this for initialization
+        void Start()
         {
-            ball.Activate();
+            rigid = GetComponent<Rigidbody>();
         }
-    }
 
-    public void Activate()
-    {
-        rigid.constraints = RigidbodyConstraints.None;
-    }
+        // Update is called once per frame
+        void FixedUpdate()
+        {
+            // Creating velocity variable called vel
+            Vector3 vel = rigid.velocity;
 
-    public void Deactive()
-    {
-        rigid.constraints = RigidbodyConstraints.FreezeAll;
+            // Check if velocity is going up
+            if (vel.y > 0)
+            {
+                // Cap velocity
+                vel.y = 0;
+            }
+
+            // IF the velocity's speed is less than the stop speed
+            if (vel.magnitude < stopSpeed)
+            {
+                // Cancel out velocity
+                vel = Vector3.zero;
+            }
+
+            rigid.velocity = vel;
+        }
+
+        public void Hit(Vector3 dir, float impactForce)
+        {
+            rigid.AddForce(dir * impactForce, ForceMode.Impulse);
+        }
     }
 }

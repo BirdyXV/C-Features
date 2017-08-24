@@ -7,6 +7,9 @@ namespace Breakout
 {
     public class GameManager : MonoBehaviour
     {
+        public Text scoreText;
+        private int score;
+
         public int width = 20;
         public int height = 20;
         public Vector2 spacing = new Vector2(25f, 10f);
@@ -19,10 +22,16 @@ namespace Breakout
         // Use this for initialization
         void Start()
         {
+            score = 0;
+            UpdateScore();
             GenerateBlocks();
             UpdateBlocks();
         }
 
+        void UpdateScore()
+        {
+            scoreText.text = "Score: " + score;
+        }
 
         GameObject GetRandomBlock()
         {
@@ -44,8 +53,11 @@ namespace Breakout
                     // Create new instance of the block
                     GameObject block = GetRandomBlock();
                     // Set the new position
-                    Vector3 pos = new Vector3(x * spacing.x,
+                    Vector2 pos = new Vector2(x * spacing.x,
                                               y * spacing.y);
+                    // Add an offset to pos 
+                    pos += offset;
+
                     block.transform.position = pos;
                     // Add spawned blocks to array
                     spawnedBlocks[x, y] = block;
@@ -67,6 +79,7 @@ namespace Breakout
                                               y * spacing.y);
                     // Add an offset to pos 
                     pos += offset;
+
                     // Set currentBlock's position to new pos
                     currentBlock.transform.position = pos;
                 }
@@ -79,6 +92,12 @@ namespace Breakout
             {
                 UpdateBlocks();
             }
+        }
+
+        public void AddScore (int newScoreValue)
+        {
+            score += newScoreValue;
+            UpdateScore();
         }
     }
 }
