@@ -9,17 +9,18 @@ namespace Breakout
         public float movementSpeed = 20f; // Speed the paddle moves
         public PinBall currentBall; // Ball that should be attached to the Paddle as a child
         public Vector2[] directions; // List of directions for the ball to choose from
-
+        public bool isBallAttached;
         void Start()
         {
             // Grabs currentBall from children of the paddle
             currentBall = GetComponentInChildren<PinBall>();
+            isBallAttached = true;
         }
 
         void Update()
         {
-            CheckInput();
             Movement();
+            CheckInput();
         }
 
         void Fire()
@@ -30,14 +31,16 @@ namespace Breakout
             Vector3 randomDir = directions[Random.Range(0, directions.Length)];
             // Fire off ball in randomDirection
             currentBall.Fire(randomDir);
+            isBallAttached = false;
         }
 
         void CheckInput()
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyDown(KeyCode.Space) && isBallAttached)
             {
                 Fire();
             }
+          
         }
 
         void Movement()

@@ -7,9 +7,6 @@ namespace Breakout
 {
     public class GameManager : MonoBehaviour
     {
-        public Text scoreText;
-        private int score;
-
         public int width = 20;
         public int height = 20;
         public Vector2 spacing = new Vector2(25f, 10f);
@@ -22,16 +19,9 @@ namespace Breakout
         // Use this for initialization
         void Start()
         {
-            score = 0;
-            UpdateScore();
             GenerateBlocks();
             UpdateBlocks();
-        }
-
-        void UpdateScore()
-        {
-            scoreText.text = "Score: " + score;
-        }
+        }     
 
         GameObject GetRandomBlock()
         {
@@ -92,12 +82,6 @@ namespace Breakout
             {
                 UpdateBlocks();
             }
-        }
-
-        public void AddScore (int newScoreValue)
-        {
-            score += newScoreValue;
-            UpdateScore();
         }
     }
 }

@@ -9,22 +9,14 @@ namespace Breakout
     public class PinBall : MonoBehaviour
     {
         public float speed = 10f; // Speed of the ball
-        public int scoreValue;
+       
         private GameManager gameManager;
 
         private Vector3 velocity; // Speed X Direction
 
         void Start()
         {
-            GameObject gameControllerObject = GameObject.FindWithTag("Block");
-            if (gameControllerObject != null)
-            {
-                gameManager = gameControllerObject.GetComponent<GameManager>();
-            }
-            if (gameManager == null)
-            {
-                Debug.Log("Cant find script");
-            }
+           
         }
 
         float hitFactor(Vector2 ballPos, Vector2 wallPos, float wallHeight)
@@ -42,7 +34,11 @@ namespace Breakout
         // Detect collision
         void OnCollisionEnter2D(Collision2D other)
         {
-
+            if(other.gameObject.tag == "Block")
+            {
+                Score.scoreValue += 1;
+            }
+            
             
             if (other.gameObject.tag == "Block")
             {

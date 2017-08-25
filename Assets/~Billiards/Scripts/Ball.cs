@@ -6,13 +6,16 @@ namespace Billiards
 {
     public class Ball : MonoBehaviour
     {
+
         public float stopSpeed = 0.2f;
+        public bool GameObject;
 
         private Rigidbody rigid;
         // Use this for initialization
         void Start()
         {
             rigid = GetComponent<Rigidbody>();
+            GameObject = true;
         }
 
         // Update is called once per frame
@@ -41,6 +44,16 @@ namespace Billiards
         public void Hit(Vector3 dir, float impactForce)
         {
             rigid.AddForce(dir * impactForce, ForceMode.Impulse);
+        }
+
+        void Update()
+        {
+            if (transform.position.y < -50)
+            {
+                Destroy(gameObject);
+                
+            }
+            
         }
     }
 }
