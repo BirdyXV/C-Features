@@ -18,5 +18,6 @@ public class Score : MonoBehaviour
     void Update()
     {
         score.text = "Score: " + scoreValue;
+        score.text += 1;
     }
 }
