@@ -27,6 +27,14 @@ namespace Minesweeper2D
             return currentTile; // Return it
         }
 
+        void OnCollisionEnter2D(Collision2D col)
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                Destroy(gameObject);
+            }
+        }
+
         void GenerateTiles()
         {
             // Create new 2D array of size width x height
@@ -71,8 +79,17 @@ namespace Minesweeper2D
                 int desiredX = t.x + x;
 
                 // IF desiredX is within range of tiles arrary length
+                if (desiredX >= 0 || desiredX < 6)
+                {
                     // IF the element at index is a mine
-                        // Increment count by 1
+                    desiredX = 6;
+                }
+                else
+                {
+                    // Increment count by 1
+                    desiredX -= (0);
+                }
+
 
             }
             return count;

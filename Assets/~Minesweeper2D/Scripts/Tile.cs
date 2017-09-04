@@ -30,6 +30,12 @@ namespace Minesweeper2D
             isMine = Random.value < 0.5f;
         }
 
+        // Destroys tile when LMB is pressed on it
+        void OnMouseDown()
+        {
+            Destroy(gameObject);
+        }
+
         public void Reveal(int adjacentMines, int mineState = 0)
         {
             // Flags the tile as being revealed
