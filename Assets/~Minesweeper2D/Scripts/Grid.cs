@@ -27,13 +27,30 @@ namespace Minesweeper2D
             return currentTile; // Return it
         }
 
-        void OnCollisionEnter2D(Collision2D col)
+        void FixedUpdate()
         {
             if (Input.GetMouseButtonDown(0))
             {
-                Destroy(gameObject);
+                Ray mouseRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+                RaycastHit2D hit = Physics2D.Raycast(mouseRay.origin, mouseRay.direction);
+                if (hit.collider != null)
+                {
+                    // LET tile = hit collider's Tile component
+                    Tile tile = hit.collider.GetComponent<Tile>();
+                    // IF tile != null
+                    if (tile != null)
+                    {
+                        // LET adjacentMines = GetAdjacentMineCountAt(tile)
+                        int adjacentMines = GetAdjacentMineCountAt(tile);
+                        // CALL tile.Reveal(adjacentMines)
+                        tile.Reveal(adjacentMines);
+                    }
+
+                }
             }
         }
+
+
 
         void GenerateTiles()
         {
@@ -75,22 +92,24 @@ namespace Minesweeper2D
             // Loop through all elements and have each axis go between -1 to 1
             for (int x = -1; x <= 1; x++)
             {
-                // Calculate desired coordinates from ones attained
-                int desiredX = t.x + x;
-
-                // IF desiredX is within range of tiles arrary length
-                if (desiredX >= 0 || desiredX < 6)
+                // Loop through all elements and have each axis go between -1 to 1
+                for (int y = -1; y <= 1; y++)
                 {
-                    // IF the element at index is a mine
-                    desiredX = 6;
-                }
-                else
-                {
-                    // Increment count by 1
-                    desiredX -= (0);
-                }
+                    // Calculate desired coordinates from ones attained
+                    int desiredX = t.x + x;
+                    int desiredY = t.y + y;
 
-
+                    // Check if desiredX and desiredY are greater than or equal to
+                    if (desiredX >= 0 && desiredY >= 0 &&
+                        desiredX < width && desiredY < height)
+                    {
+                        Tile tile = tiles[desiredX, desiredY];
+                        if (tile.isMine)
+                        {
+                            count++;
+                        }
+                    }
+                }
             }
             return count;
         }
