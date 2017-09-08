@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace TowerDefence
 {
@@ -10,6 +11,7 @@ namespace TowerDefence
         public Transform target; //Target that each AI Agent should travel to
         public float spawnRate = 1f; // Rate of spawn
         public float spawnRadius = 1f; // Radius of spawn
+
 
         // Visualization code
         void OnDrawGizmos()

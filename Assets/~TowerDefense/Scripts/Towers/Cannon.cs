@@ -10,7 +10,7 @@ namespace TowerDefence
         public Transform barrel; // Reference to barrel where bullet will be shot from
         public GameObject projectilePrefab; // Prefab of projectile to instantiate when firing
 
-      public void Fire(Enemy targetEnemy)
+        public void Fire(Enemy targetEnemy)
         {
             // LET targetPos = targetEnemy's position
             Vector3 targetPos = transform.position;
@@ -22,18 +22,12 @@ namespace TowerDefence
             Vector3 fireDirection = targetPos - barrelPos;
             // SET cannon's rotation = Quarternion.LookRotation(fireDirection, Vector3.up)
             transform.rotation = Quaternion.LookRotation(fireDirection, Vector3.up);
-            // Let clone = Instantiate(projectilePrefab, barrelPos, barrelRot
+            // LET clone = Instantiate(projectilePrefab, barrelPos, barrelRot
             GameObject clone = Instantiate(projectilePrefab, barrelPos, barrelRot);
             // LET p = clone's Projectile component
-            Vector3 p = 
+            Projectile p = clone.GetComponent<Projectile>();
             // SET p.direction = fireDirection
-            p.direction = fireDirection
-
-
-
-            
-
-
+            p.direction = fireDirection;
         }
     }
 }

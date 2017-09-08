@@ -22,11 +22,13 @@ namespace TowerDefence
         void OnTriggerEnter(Collider col)
         {
             // LET e = col's Enemy component
-            
+            Enemy e = col.GetComponent<Enemy>();
             // IF e != null
             if (e != null)
             {
+                // CALL e.DealDamage(damage) (DealDamage is from Enemy script
                 e.DealDamage(damage);
+                // Destroy the gameObject
                 Destroy(gameObject);                    
             }
 
