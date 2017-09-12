@@ -13,9 +13,9 @@ namespace TowerDefence
         public void Fire(Enemy targetEnemy)
         {
             // LET targetPos = targetEnemy's position
-            Vector3 targetPos = transform.position;
+            Vector3 targetPos = targetEnemy.transform.position;
             // LET barrelPos = barrel's position
-            Vector3 barrelPos = transform.position;
+            Vector3 barrelPos = barrel.transform.position;
             // LET barrelRot = barrel's rotation
             Quaternion barrelRot = transform.rotation;
             // LET fireDirection = targetPos - barrelPos
