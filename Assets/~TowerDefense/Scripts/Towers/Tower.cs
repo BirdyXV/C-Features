@@ -44,6 +44,8 @@ namespace TowerDefence
 
         Enemy GetClosestEnemy()
         {
+            // SET enemies = RemoveAllNulls(enemies)
+            enemies = RemoveAllNulls(enemies);
             // LET closest = null
             Enemy closest = null;
             // LET minDistance = float.maxValue
@@ -68,7 +70,7 @@ namespace TowerDefence
         void Attack()
         {
             // LET closest to GetClosestEnemy();
-            var closest = GetClosestEnemy();
+            Enemy closest = GetClosestEnemy();
 
             // IF closest != null
             if (closest != null)
@@ -90,6 +92,26 @@ namespace TowerDefence
                 // SET attackTimer = 0
                 attackTimer = 0;
             }
+        }
+
+        List<Enemy> RemoveAllNulls(List<Enemy> listWithNulls)
+        {
+            // LET listWithoutNulls = new list
+            List<Enemy> listWithoutNulls = new List<Enemy>();
+
+            // Loop through entire listWithNulls
+            foreach (var Enemy in listWithNulls)
+            {
+                
+            }
+            // IF element is NOT null
+            if ()
+            {
+                // Add element to listWithoutNulls
+            }
+
+            // RETURN listWithoutNulls
+            return listWithNulls;
         }
     }
 }
