@@ -105,10 +105,9 @@ namespace TowerDefence
                 
             }
             // IF element is NOT null
-            if ()
-            {
+           
                 // Add element to listWithoutNulls
-            }
+            
 
             // RETURN listWithoutNulls
             return listWithNulls;
