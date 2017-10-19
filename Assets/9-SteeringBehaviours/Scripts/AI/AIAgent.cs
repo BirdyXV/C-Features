@@ -7,23 +7,20 @@ namespace AI
 {
     public class AIAgent : MonoBehaviour
     {
-        public Vector3 force; // total force calculated from behaviours
-        public Vector3 velocity; // direction of travel and speed
         public float maxVelocity = 100f; // max amount of velocity
         public float maxDistance = 10f;
-        public bool freezeRotation = false; // do we freeze rotation?
 
-        private NavMeshAgent nav;
+        [HideInInspector]
+        public Vector3 velocity;
+
+        private Vector3 force;
         // List of behaviours (i.e, Seek, Flee, Wander, etc)
         private List<SteeringBehaviour> behaviours;
+        private NavMeshAgent nav;
 
         void Awake()
         {
             nav = GetComponent<NavMeshAgent>();
-        }
-
-        void Start()
-        {
             behaviours = new List<SteeringBehaviour>(GetComponents<SteeringBehaviour>());
         }
 
@@ -32,18 +29,18 @@ namespace AI
             // SET force to zero
             force = Vector3.zero;
             // FOR i :(defined to)= 0 < behaviours.Count
-            for (int i = 0; i < behaviours.Count;)
+            for (int i = 0; i < behaviours.Count; i++)
             {
                 // LET behaviour = behaviours[i]
                 SteeringBehaviour behaviour = behaviours[i];
-                // IF behaviour.isActiveAndEnabled == false\
+                // IF behaviour.isActiveAndEnabled == false
                 if (behaviour.isActiveAndEnabled == false)
                 {
                     // continue
                     continue;
                 }
-                // SET force = force + behaviour.GetForce() * behaviour.weighting
-                force = force + behaviour.GetForce() * behaviour.weighting;
+                // SET force = force + behaviour.GetForce()
+                force = force + behaviour.GetForce();
                 // IF force > maxVelocity
                 if (force.magnitude > maxVelocity)
                 {
@@ -65,8 +62,8 @@ namespace AI
                 // SET velocity = velocity.normalized * maxVeloctiy
                 velocity = velocity.normalized * maxVelocity;
             }
-            // IF velocity.magnitude = 0
-            if (true)
+            // IF velocity.magnitude == 0
+            if (velocity.magnitude > 0)
             {
                 // SET transform.position = transform.position + velocity * deltaTime
                 transform.position += velocity * Time.deltaTime;

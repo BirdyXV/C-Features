@@ -4,10 +4,11 @@ using UnityEngine;
 
 namespace AI
 {
+    [RequireComponent(typeof(AIAgent))]
     public class SteeringBehaviour : MonoBehaviour
     {
-        public float weighting = 8f;
-        public Vector3 force;
+        public float weighting = 7.5f;
+        [HideInInspector]
         public AIAgent owner;
 
         protected virtual void Awake()

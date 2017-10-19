@@ -1,10 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using GGL;
 
 namespace AI
 {
-    public class Seek : SteeringBehaviour
+    public class Flee : SteeringBehaviour
     {
         public Transform target;
         public float stoppingDistance = 1f;
@@ -20,7 +21,7 @@ namespace AI
                 return force;
             }
             // LET desiredForce = target's position - transform's position
-            Vector3 desiredForce = target.position - transform.position;
+            Vector3 desiredForce = transform.position - target.position;
             // IF desiredForce.mangnitude > stoppingDistance 
             if (desiredForce.magnitude > stoppingDistance)
             {
@@ -29,6 +30,13 @@ namespace AI
                 // SET force = desiredForce - owner.velocity
                 force = desiredForce - owner.velocity;
             }
+
+            #region GizmosGL
+            GizmosGL.color = Color.red;
+            GizmosGL.AddLine(transform.position, transform.position + force, 0.1f, 0.1f);
+            GizmosGL.color = Color.green;
+            GizmosGL.AddLine(transform.position, transform.position + desiredForce, 0.1f, 0.1f);
+            #endregion
             // return the force
             return force;
         }
