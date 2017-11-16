@@ -8,6 +8,6 @@ namespace MOBA
 {
     public class CollisionAvoidance : SteeringBehaviour
     {
-
+      
     }
 }

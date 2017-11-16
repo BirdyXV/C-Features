@@ -9,6 +9,5 @@ namespace MOBA
 {
     public class PathFollowing : SteeringBehaviour
     {
-
     }
 }
