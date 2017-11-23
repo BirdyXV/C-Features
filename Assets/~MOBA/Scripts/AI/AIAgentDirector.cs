@@ -22,6 +22,7 @@ namespace MOBA
         {
             cam = GetComponent<Camera>();
         }
+
         void Start()
         {
             GameObject g = new GameObject("Target Location");
@@ -33,12 +34,17 @@ namespace MOBA
             // Loop through all agents to direct
             foreach (var agent in agentsToDirect)
             {
+                // Seek
                 Seek s = agent.GetComponent<Seek>();
-                // Is there a seek component on the agent?
+                // Is there a Seek component on the agent?
                 if (s != null)
-                {
-                    s.target = target; // Assign target
-                }
+                    s.target = target; // Assign target to Seek component
+
+                // PathFollowing
+                PathFollowing p = agent.GetComponent<PathFollowing>();
+                // Is PathFollowing attached to agent?
+                if (p != null)
+                    p.target = target; // Assign target to PathFollowing component on agent
             }
         }
 
@@ -65,6 +71,5 @@ namespace MOBA
                 }
             }
         }
-
     }
 }
